@@ -36,12 +36,14 @@ class IdentityTransmission(Transmission):
 
 class Peer(models.Model):
 
-    address = models.CharField('Address', max_length=255, blank=True)
+    identifier = models.CharField('Address', max_length=255, default='Unknown')
 
 
 class Session(models.Model):
 
     version = models.IntegerField('Model Version', default=1)
+    platform = models.CharField('Client Platform', max_length=255, default='Unknown')
+    role = models.CharField('Role (Central, Peripheral)', max_length=255, default='Unknown')
 
     local_peer = models.ForeignKey(Peer, related_name='initiated_session')
     remote_peer = models.ForeignKey(Peer, related_name='received_session')
