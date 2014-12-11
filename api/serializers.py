@@ -29,6 +29,14 @@ class IdentityTransmissionSerializer(serializers.ModelSerializer):
 
 
 class SessionSerializer(serializers.ModelSerializer):
+
+    local_peer = PeerSerializer()
+    remote_peer = PeerSerializer()
+    identities_written = IdentityTransmissionSerializer(many=True)
+    identities_read = IdentityTransmissionSerializer(many=True)
+    messages_written = MessageTransmissionSerializer(many=True)
+    messages_read = MessageTransmissionSerializer(many=True)
+
     class Meta:
         model = Session
         depth = 2
@@ -45,5 +53,7 @@ class SessionSerializer(serializers.ModelSerializer):
 
         session.local_peer = local_peer
         session.remote_peer = remote_peer
+
+        # TODO Transmissions
 
         return session
