@@ -1,4 +1,4 @@
-local_settings.py
+blestat/local_dev_settings.py
 *.pyc
 *.sqlite3
 .idea/
