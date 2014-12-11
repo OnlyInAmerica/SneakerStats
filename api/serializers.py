@@ -55,5 +55,13 @@ class SessionSerializer(serializers.ModelSerializer):
         session.remote_peer = remote_peer
 
         # TODO Transmissions
+        ids_written_data = validated_data.pop('identities_written')
+        ids_written = IdentityTransmission.objects.create(**ids_written_data)
+
+        ids_read_data = validated_data.pop('identities_read')
+        ids_read = IdentityTransmission.objects.create(**ids_read_data)
+
+        session.identities_read = ids_read
+        session.identities_written = ids_written
 
         return session
