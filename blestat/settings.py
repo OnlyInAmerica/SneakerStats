@@ -7,6 +7,8 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+import dj_database_url
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -17,15 +19,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x30yrcylurxnk0a!=z1(rf4350mel)7mo2ps=myioktl$wz^z$'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEBUG = False
 
 # Application definition
 
@@ -93,8 +93,6 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
-import dj_database_url
-
 DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -117,5 +115,4 @@ STATICFILES_DIRS = (
 try:
     from local_dev_settings import *
 except ImportError:
-    print 'failed to import the jawn jawn'
     pass
