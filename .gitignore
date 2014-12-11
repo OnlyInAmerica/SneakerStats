@@ -1,3 +1,5 @@
+static/
+staticfiles/
 blestat/local_dev_settings.py
 *.pyc
 *.sqlite3
