@@ -6,19 +6,19 @@ from django.db import models
 class Identity(models.Model):
 
     alias = models.CharField('Alias', max_length=255, blank=True)
-    pub_key = models.CharField('Public Key', max_length=255)
+    pub_key = models.CharField('Public Key', max_length=255, unique=True)
 
 
 class Message(models.Model):
 
-    signature = models.CharField('Signature', max_length=255, blank=True)
+    signature = models.CharField('Signature', max_length=255, unique=True)
 
 
 class Transmission(models.Model):
 
     successful = models.BooleanField('Successful', default=True)
     start_time = models.DateTimeField('Start Time', blank=True, null=True)
-    end_time = models.DateTimeField('Stop Time', blank=True, null=True)
+    stop_time = models.DateTimeField('Stop Time', blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -36,7 +36,7 @@ class IdentityTransmission(Transmission):
 
 class Peer(models.Model):
 
-    identifier = models.CharField('Address', max_length=255, default='Unknown')
+    identifier = models.CharField('Address', max_length=255, default='Unknown', unique=True)
 
 
 class Session(models.Model):
